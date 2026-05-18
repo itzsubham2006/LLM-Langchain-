@@ -1,0 +1,5 @@
+# virtual environment
+langenv/
+
+# env files
+.env
