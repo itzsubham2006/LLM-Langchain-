@@ -1,1 +1,3 @@
-print("Lets start the gamee.......")
+import langchain
+
+print(langchain.__version__)
