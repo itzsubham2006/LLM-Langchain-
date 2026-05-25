@@ -1,0 +1,17 @@
+{
+    "name": null,
+    "input_variables": [
+        "len_input",
+        "paper_input",
+        "style_input"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\n\nYou are an expert academic writer and formatter.\n\nGenerate a {style_input} style answer for the following paper/question.\n\nQuestion/Paper:\n{paper_input}\n\nRequirements:\n- The answer length should be approximately {len_input}.\n- Maintain a clean, human-written style.\n- Use simple but effective language.\n- Keep the structure organized with proper paragraphs and headings if needed.\n- Avoid unnecessary repetition.\n- Make the response accurate, natural, and exam-friendly.\n- If the question requires examples, include relevant examples.\n- If definitions are asked, make them concise and clear.\n- If the question is theoretical, explain step-by-step in an understandable way.\n\nOutput only the final answer without extra explanations.    \n    ",
+    "template_format": "f-string",
+    "validate_template": false,
+    "_type": "prompt"
+}

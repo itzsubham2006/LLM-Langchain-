@@ -11,4 +11,4 @@ llm = HuggingFaceEndpoint(
 model = ChatHuggingFace(llm=llm)
 
 result = model.invoke("What is the capital of India?")
-print(result.content)       # It will throw an error because API key is not passed, since we have to buy the API key
+print(result.content)       
