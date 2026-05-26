@@ -1,0 +1,12 @@
+{
+
+    "title" : "Review",
+    "Discription" : "Test review",
+    "type" : "object",
+    "properties" : {
+        "name" : "String",
+        "age" : "int"
+    },
+
+    "required" : ["name"]
+}
