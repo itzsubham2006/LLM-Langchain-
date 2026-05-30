@@ -1,6 +1,6 @@
 from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
 from langchain_core.prompts import PromptTemplate
-from langchain_core.runnables import RunnableSequence, RunnableParallel
+from langchain_core.runnables import RunnableSequence, RunnableParallel, RunnableLambda, RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
 
@@ -15,23 +15,26 @@ llm = HuggingFaceEndpoint(
 model = ChatHuggingFace(llm=llm)
 parser = StrOutputParser()
 
-prompt1 = PromptTemplate(
-    template='Generate a tweet about {topic}',
+
+prompt = PromptTemplate(
+    template='Generate a joke about {topic}',
     input_variables=['topic']
 )
 
-prompt2 = PromptTemplate(
-    template='Generate a linkedin post about {text}',
-    input_variables=['text']
+# function to count the number of words
+def count(text):
+    return len(text.split())
+
+gen_joke = RunnableSequence(prompt, model, parser)
+
+parrallel_chain = RunnableParallel(
+    {
+        
+    'joke' : RunnablePassthrough(),    
+    'joke_count' : RunnableLambda(count),
+}
 )
 
-
-parallel_chain = RunnableParallel({
-    'tweet': RunnableSequence(prompt1, model, parser),
-    'linkedin' : RunnableSequence(prompt2, model, parser)
-})
-
-
-
-result = parallel_chain.invoke({'topic':'HuggingFace'})
+final_chain = RunnableSequence(gen_joke, parrallel_chain)
+result = final_chain.invoke({'topic': 'AI'})
 print(result)
