@@ -46,6 +46,7 @@ merge_chain = prompt3 | model1 | parser
 
 chain = parallel_chain | merge_chain
 
+
 text =  """
         Standardized Tests provide an objective, efficient method for measuring student achievement and holding schools accountable, but they are criticized for narrowing the curriculum and creating inequity. 
 
