@@ -1,7 +1,7 @@
 from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser
+from langchain_core.output_parsers import JsonOutputParser
 
 load_dotenv()
 
@@ -12,20 +12,20 @@ llm = HuggingFaceEndpoint(
 
 model = ChatHuggingFace(llm=llm)
 
+parser = JsonOutputParser()
+
 template1 = PromptTemplate(
-    template='Write a detailed explanation of the {topic}',
+    template='Write a detailed explaination about {topic}.',
     input_variables=['topic']
 )
 
-template2 = PromptTemplate(
-    template='Write a detailed explanation of the {detailed_topic}',
-    input_variables=['detailed_topic']
+template2 =  PromptTemplate(
+    template='Write something that is very important in {detailed_explaination}',
+    input_variables=['detailed_explanation'],
+    partial_variables={'format_instructtion' : parser.get_format_instructions()}
 )
-
-parser = StrOutputParser()
 
 chain = template1 | model | parser | template2 | model | parser
 
-result = chain.invoke({'topic': 'World War II'})
-
+result = chain.invoke({'topic': 'black hole'})
 print(result)

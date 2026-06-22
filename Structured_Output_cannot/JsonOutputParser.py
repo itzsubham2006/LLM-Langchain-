@@ -26,3 +26,4 @@ chain = template1 | model | parser
 result = chain.invoke({})
 
 print(result)
+
