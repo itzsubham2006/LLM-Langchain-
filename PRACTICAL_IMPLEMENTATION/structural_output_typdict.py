@@ -1,8 +1,10 @@
-from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_core.prompts import PromptTemplate
 from dotenv import load_dotenv
-from typing import TypedDict, Annotated, Optional
+from typing import TypedDict, Annotated
 
 load_dotenv()
+
 
 llm = HuggingFaceEndpoint(
     repo_id= "deepseek-ai/DeepSeek-V4-Flash", task = 'text-generation'
@@ -11,14 +13,13 @@ llm = HuggingFaceEndpoint(
 model = ChatHuggingFace(llm=llm)
 
 class Review(TypedDict):
-    summary : Annotated[str, 'Write the summary of the review.']
-    sentiments : Annotated[str, 'Write the sentiment of the review, whether positive or negative.']
-    length : Annotated[int, 'Write the length of the review.']
+    
+    summary : Annotated[str, 'Returns summary of the Review']
+    sentiments : Annotated[str, 'Returns sentiments of the review']
+    
+structured_output_model = model.with_structured_output(Review)
 
-structured_output = model.with_structured_output(Review)
-
-
-result = structured_output.invoke("""Standardized Tests provide an objective, efficient method for measuring student achievement and holding schools accountable, but they are criticized for narrowing the curriculum and creating inequity. 
+result = structured_output_model.invoke("""Standardized Tests provide an objective, efficient method for measuring student achievement and holding schools accountable, but they are criticized for narrowing the curriculum and creating inequity. 
 
 Pros:
     Objective Measurement: They offer consistent benchmarks and quick data analysis to track student progress and identify learning gaps across large populations. 

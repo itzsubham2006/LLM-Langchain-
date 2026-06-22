@@ -5,10 +5,9 @@ class Person(TypedDict):
     name : str
     age : int
     
-    
-new_Person : Person = {
-    'name': 'Subham',
-    'age' : 20
+new_person : Person = {
+    'name' : 'Subham',
+    'int' : 19
 }
 
-print(new_Person)
+print(new_person)
