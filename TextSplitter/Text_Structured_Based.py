@@ -2,6 +2,7 @@ from langchain_text_splitters import CharacterTextSplitter, RecursiveCharacterTe
 from langchain_community.document_loaders import PyPDFLoader
 
 loader = PyPDFLoader(file_path=r'datasets\Packages.pdf')
+
 docs = loader.load()
 
 
