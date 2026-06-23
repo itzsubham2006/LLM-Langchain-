@@ -8,6 +8,7 @@ loader = DirectoryLoader(
     glob='*.pdf',
     loader_cls=PyPDFLoader
 )
+
 docs = loader.load()
 # docs2 = loader.lazy_load()         ------> Use when the documents are in large number     
 
